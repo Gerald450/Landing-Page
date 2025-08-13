@@ -167,3 +167,111 @@ form input[type=button]:hover { background:#00a1b3b4; }
   .item .image img { height: 150px; }
 }
 
+/* Projects Section */
+.projects-section {
+  padding: 60px 20px;
+  background: url('https://img.freepik.com/free-vector/creative-geometric-design-space_53876-89781.jpg?size=626&ext=jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  color: #fff;
+}
+
+.projects-section::before {
+  content: '';
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+.projects-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.projects-section header h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.projects-section header p {
+  text-align: center;
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+/* Slider Layout */
+.projects-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.projects-slider::-webkit-scrollbar {
+  height: 8px;
+}
+.projects-slider::-webkit-scrollbar-thumb {
+  background: #00eaff38;
+  border-radius: 5px;
+}
+
+/* Project Cards */
+.project-card {
+  flex: 0 0 300px;
+  scroll-snap-align: center;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+.project-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.project-card h3 span {
+  display: block;
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+.project-card p {
+  color: #eee;
+  margin-bottom: 15px;
+}
+
+.learn-more-btn {
+  display: inline-block;
+  background: #00eaff38;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.learn-more-btn:hover {
+  background: #00a1b3b4;
+}
+
+/* Mobile adjustments */
+@media(max-width: 600px) {
+  .project-card { flex: 0 0 250px; }
+}

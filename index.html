@@ -20,32 +20,38 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-  emailjs.init("zEUGLcSxQ2BJS6iai"); // your public key
+      function flashButton() {
+        const btn = document.getElementById("sendBtn");
+        btn.classList.add("flash");
+        setTimeout(() => btn.classList.remove("flash"), 400); // Remove after animation
+      }
 
-  function sendEmail() {
-    // Collect values
-    const templateParams = {
-      name: document.getElementById("name").value,
-      contact_number: document.getElementById("contactn").value,
-      message: document.getElementById("message").value,
-      time: new Date().toLocaleString()
-    };
+      emailjs.init("zEUGLcSxQ2BJS6iai"); // your public key
 
-    // Make sure these match your EmailJS service and template
-    emailjs.send("service_ic22dvo", "template_g2o36ap", templateParams)
-      .then(response => {
-        alert("Message sent successfully!");
-        document.getElementById("contactForm").reset();
-      })
-      .catch(error => {
-        console.error("EmailJS Error:", error);
-        alert("Oops! Something went wrong. Please check your inputs and IDs.");
-      });
-  }
-</script>
+      function sendEmail() {
+        // Collect values
+        const templateParams = {
+          name: document.getElementById("name").value,
+          contact_number: document.getElementById("contactn").value,
+          message: document.getElementById("message").value,
+          time: new Date().toLocaleString(),
+        };
 
+        // Make sure these match your EmailJS service and template
+        emailjs
+          .send("service_ic22dvo", "template_g2o36ap", templateParams)
+          .then((response) => {
+            alert("Message sent successfully!");
+            document.getElementById("contactForm").reset();
+          })
+          .catch((error) => {
+            console.error("EmailJS Error:", error);
+            alert(
+              "Oops! Something went wrong. Please check your inputs and IDs."
+            );
+          });
+      }
 
-    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -53,6 +59,40 @@
       gtag("js", new Date());
       gtag("config", "G-EZF49W5GDV");
     </script>
+    <style>
+      #sendBtn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+		
+      }
+
+      #sendBtn:hover {
+        background-color: #0056b3;
+      }
+
+      /* Flash animation */
+      @keyframes flash {
+        0%,
+        100% {
+          transform: scale(1);
+          background-color: #007bff;
+        }
+        50% {
+          transform: scale(1.2);
+          background-color: #28a745;
+        }
+      }
+
+      .flash {
+        animation: flash 0.4s;
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
@@ -83,7 +123,7 @@
           >University of Arkansas at Pine Bluff</a
         >
       </h2>
-      <a href="#portfolio" class="button">Enter Site</a>
+      <a href="assets/Shimo_resume3_FALL25.pdf" class="button">Resume</a>
     </section>
 
     <!-- Portfolio -->
@@ -261,11 +301,10 @@
             placeholder="Message"
             required
           ></textarea>
-          <input type="button" value="Send Message" onclick="sendEmail()" />
+          <input type="button" value="Send Message" id="sendBtn" onclick="sendEmail()" />
         </form>
       </div>
     </section>
-
 
     <!-- Social Links Section -->
     <section id="social-links" class="social-section">

@@ -275,3 +275,34 @@ form input[type=button]:hover { background:#00a1b3b4; }
 @media(max-width: 600px) {
   .project-card { flex: 0 0 250px; }
 }
+
+.social-section {
+  background: #111;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.social-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.social-section .icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+}
+
+.social-section .icons li a {
+  font-size: 2rem;
+  color: #00eaff38;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-section .icons li a:hover {
+  color: #00a1b3b4;
+  transform: scale(1.2);
+}

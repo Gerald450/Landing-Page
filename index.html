@@ -18,6 +18,33 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+  emailjs.init("zEUGLcSxQ2BJS6iai"); // your public key
+
+  function sendEmail() {
+    // Collect values
+    const templateParams = {
+      name: document.getElementById("name").value,
+      contact_number: document.getElementById("contactn").value,
+      message: document.getElementById("message").value,
+      time: new Date().toLocaleString()
+    };
+
+    // Make sure these match your EmailJS service and template
+    emailjs.send("service_ic22dvo", "template_g2o36ap", templateParams)
+      .then(response => {
+        alert("Message sent successfully!");
+        document.getElementById("contactForm").reset();
+      })
+      .catch(error => {
+        console.error("EmailJS Error:", error);
+        alert("Oops! Something went wrong. Please check your inputs and IDs.");
+      });
+  }
+</script>
+
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -239,20 +266,6 @@
       </div>
     </section>
 
-    <script>
-      function sendEmail() {
-          var name = document.getElementById('name').value;
-          var contactn = document.getElementById('contactn').value;
-          var message = document.getElementById('message').value;
-
-          var subject = 'Reaching out';
-          var body = `Hi, Gerald, my name is ${name} and this is my number ${contactn}. ${message}`;
-      	try{
-      		window.location.href = `mailto:shimogerald450@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      	}catch(err){
-      		console.error('failed: ', err)
-      	}}
-    </script>
 
     <!-- Social Links Section -->
     <section id="social-links" class="social-section">

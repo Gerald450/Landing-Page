@@ -74,7 +74,7 @@ function Intro() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <a
-            href="/assets/Shimo_resume3_FALL25.pdf"
+            href="/assets/shimo_Amazon.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary inline-block text-lg px-8 py-4"

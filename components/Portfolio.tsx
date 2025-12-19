@@ -13,7 +13,7 @@ const portfolioItems = [
   {
     title: 'Teamplayer',
     image: '/images/15C5E0F1-F52D-4BFA-94EE-217123579A1D_1_105_c.jpeg',
-    link: '/ESLI Certificate.pdf',
+    link: '/assets/ESLI_Certificate.pdf',
   },
   {
     title: 'Confident',

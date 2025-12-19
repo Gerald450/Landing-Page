@@ -20,19 +20,19 @@ const projects = [
     title: 'Study Group Matcher',
     date: 'Jun 2025',
     description: 'Fullstack tool connecting students by course & schedule.',
-    link: 'https://study-group-matcher.vercel.app/signin',
+    link: 'https://study-group-matcher.vercel.app/',
   },
   {
     title: 'Flashcards Generator',
     date: 'Oct 2024',
     description: 'AI study tool reducing prep time by 80%.',
-    link: 'https://ai-flash-cards-2-q7ekz4gn6-gerald450s-projects.vercel.app/',
+    link: 'https://ai-flash-cards-2.vercel.app/',
   },
   {
     title: 'Telehealth Platform',
     date: 'Jul 2024',
     description: 'Appointment scheduler + first-aid chatbot MVP.',
-    link: 'https://tele-health-seven.vercel.app',
+    link: 'https://tele-health-seven.vercel.app/',
   },
   {
     title: 'Inventory Management',

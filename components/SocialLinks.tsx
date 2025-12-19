@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 
 const socialLinks = [
@@ -35,14 +36,14 @@ const socialLinks = [
   },
 ]
 
-export default function SocialLinks() {
+function SocialLinks() {
   return (
     <section className="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
@@ -55,10 +56,11 @@ export default function SocialLinks() {
                 key={link.name}
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
+                className="will-change-transform"
               >
                 <a
                   href={link.href}
@@ -77,4 +79,6 @@ export default function SocialLinks() {
     </section>
   )
 }
+
+export default memo(SocialLinks)
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 
 const projects = [
@@ -41,14 +42,14 @@ const projects = [
   },
 ]
 
-export default function Projects() {
+function Projects() {
   return (
     <section id="projects" className="section-padding bg-white">
       <div className="container-custom">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -66,10 +67,10 @@ export default function Projects() {
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 shadow-lg card-hover border border-gray-200"
+              className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 shadow-lg card-hover border border-gray-200 will-change-transform"
             >
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-2xl font-bold text-gray-900">{project.title}</h3>
@@ -94,4 +95,6 @@ export default function Projects() {
     </section>
   )
 }
+
+export default memo(Projects)
 

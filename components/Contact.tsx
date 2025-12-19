@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useCallback, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
+
+let emailjsInitialized = false
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,20 +14,39 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const formDataRef = useRef(formData)
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  // Keep ref in sync with state
+  useEffect(() => {
+    formDataRef.current = formData
+  }, [formData])
+
+  useEffect(() => {
+    // Initialize EmailJS once when component mounts
+    if (!emailjsInitialized) {
+      emailjs.init('zEUGLcSxQ2BJS6iai')
+      emailjsInitialized = true
+    }
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
+
+  const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      // Initialize EmailJS
-      emailjs.init('zEUGLcSxQ2BJS6iai')
-
+      const currentFormData = formDataRef.current
       const templateParams = {
-        name: formData.name,
-        contact_number: formData.contact_number,
-        message: formData.message,
+        name: currentFormData.name,
+        contact_number: currentFormData.contact_number,
+        message: currentFormData.message,
         time: new Date().toLocaleString(),
       }
 
@@ -34,22 +55,24 @@ export default function Contact() {
       setSubmitStatus('success')
       setFormData({ name: '', contact_number: '', message: '' })
       
-      setTimeout(() => setSubmitStatus('idle'), 3000)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      timeoutRef.current = setTimeout(() => setSubmitStatus('idle'), 3000)
     } catch (error) {
       console.error('EmailJS Error:', error)
       setSubmitStatus('error')
-      setTimeout(() => setSubmitStatus('idle'), 3000)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      timeoutRef.current = setTimeout(() => setSubmitStatus('idle'), 3000)
     } finally {
       setIsSubmitting(false)
     }
-  }
+  }, [])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    })
-  }
+    }))
+  }, [])
 
   return (
     <section id="contact" className="section-padding bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
@@ -57,7 +80,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
@@ -72,7 +95,7 @@ export default function Contact() {
         <motion.form
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20"
@@ -119,7 +142,7 @@ export default function Contact() {
               disabled={isSubmitting}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`w-full py-4 rounded-lg font-semibold text-lg transition-all duration-300 ${
+              className={`w-full py-4 rounded-lg font-semibold text-lg transition-all duration-300 will-change-transform ${
                 isSubmitting
                   ? 'bg-gray-500 cursor-not-allowed'
                   : 'bg-blue-600 hover:bg-blue-700'

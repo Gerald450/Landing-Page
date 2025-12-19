@@ -1,8 +1,9 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 
-export default function Intro() {
+function Intro() {
   return (
     <section
       id="top"
@@ -11,7 +12,6 @@ export default function Intro() {
         backgroundImage: "url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=3220&auto=format&fit=crop')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
       }}
     >
       {/* Overlay */}
@@ -20,7 +20,7 @@ export default function Intro() {
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl will-change-transform"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -31,9 +31,10 @@ export default function Intro() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
+          style={{ transform: 'translateZ(0)' }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl will-change-transform"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, -50, 0],
@@ -44,6 +45,7 @@ export default function Intro() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
+          style={{ transform: 'translateZ(0)' }}
         />
       </div>
 
@@ -101,4 +103,6 @@ export default function Intro() {
     </section>
   )
 }
+
+export default memo(Intro)
 

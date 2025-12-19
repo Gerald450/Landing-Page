@@ -1,6 +1,8 @@
 'use client'
 
-export default function Footer() {
+import { memo } from 'react'
+
+function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-8">
       <div className="container-custom text-center">
@@ -11,4 +13,6 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default memo(Footer)
 

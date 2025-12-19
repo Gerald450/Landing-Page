@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -36,14 +37,14 @@ const portfolioItems = [
   },
 ]
 
-export default function Portfolio() {
+function Portfolio() {
   return (
     <section id="portfolio" className="section-padding bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container-custom">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -61,9 +62,9 @@ export default function Portfolio() {
               key={item.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg card-hover bg-white"
+              className="group relative overflow-hidden rounded-2xl shadow-lg card-hover bg-white will-change-transform"
             >
               <a
                 href={item.link}
@@ -77,6 +78,8 @@ export default function Portfolio() {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  quality={85}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <motion.div
@@ -98,4 +101,6 @@ export default function Portfolio() {
     </section>
   )
 }
+
+export default memo(Portfolio)
 
